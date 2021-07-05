@@ -13,6 +13,7 @@ services:
     links: 
       - homologacao
       - qa
+      - producao
   homologacao:
     container_name: homologacao
     build:
@@ -43,6 +44,22 @@ services:
       - ./QA/conf.d:/etc/nginx/conf.d
       - ./QA/php-fpm:/usr/local/etc/php-fpm.d/
       - ./QA/www:/var/www/html
+    networks:
+      - cleanclic
+  producao:
+    container_name: producao
+    build:
+      context: .
+      dockerfile: dockerfile
+    working_dir: /var/www/html
+    command: composer install
+    command: npm install    
+    ports:
+      - "1003:80"
+    volumes:
+      - ./PRODUCAO/conf.d:/etc/nginx/conf.d
+      - ./PRODUCAO/php-fpm:/usr/local/etc/php-fpm.d/
+      - ./PRODUCAO/www:/var/www/html
     networks:
       - cleanclic
   tika:
