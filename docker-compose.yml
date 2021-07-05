@@ -16,12 +16,8 @@ services:
       - producao
   homologacao:
     container_name: homologacao
-    build:
-      context: .
-      dockerfile: dockerfile
+    image: "max220893/alpine3.13_php8.0.8-fpm_srvsql_nginx:latest"
     working_dir: /var/www/html
-    command: composer install
-    command: npm install    
     ports:
       - "1001:80"
     volumes:
@@ -32,12 +28,8 @@ services:
       - cleanclic
   qa:
     container_name: qa
-    build:
-      context: .
-      dockerfile: dockerfile
-    working_dir: /var/www/html
-    command: composer install
-    command: npm install    
+    image: "max220893/alpine3.13_php8.0.8-fpm_srvsql_nginx:latest"
+    working_dir: /var/www/html 
     ports:
       - "1002:80"
     volumes:
@@ -48,12 +40,8 @@ services:
       - cleanclic
   producao:
     container_name: producao
-    build:
-      context: .
-      dockerfile: dockerfile
-    working_dir: /var/www/html
-    command: composer install
-    command: npm install    
+    image: "max220893/alpine3.13_php8.0.8-fpm_srvsql_nginx:latest"
+    working_dir: /var/www/html  
     ports:
       - "1003:80"
     volumes:
