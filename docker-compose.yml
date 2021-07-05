@@ -1,0 +1,19 @@
+version: "3.9"
+services:  
+  homologacao:
+    container_name: homologacao
+    build:
+      context: .
+      dockerfile: dockerfile
+    # command: npm run prod
+    ports:
+      - "1001:80"
+    volumes:
+      - ./HOMOLOGACAO/conf.d:/etc/nginx/conf.d
+      - ./HOMOLOGACAO/php-fpm:/usr/local/etc/php-fpm.d/
+      # - ./HOMOLOGACAO/www:/var/wwww/html      
+    networks:
+      - cleanclic
+networks:
+  cleanclic:
+    driver: bridge
