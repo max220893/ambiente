@@ -40,6 +40,13 @@ services:
       - ./QA/www:/var/www/html
     networks:
       - cleanclic
+  tika:
+    container_name: tika
+    image: "apache/tika:latest-full"
+    ports:
+      - "9998:9998"
+    networks:
+      - cleanclic
 networks:
   cleanclic:
     driver: bridge
