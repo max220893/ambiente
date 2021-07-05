@@ -1,17 +1,43 @@
 version: "3.9"
-services:  
+services:
+  proxy:
+    container_name: proxy
+    image: "nginx:stable-alpine"
+    ports:
+      - "80:80"
+    volumes:
+      - ./PROXY/conf.d:/etc/nginx/conf.d
+    networks:
+      - cleanclic
+    links: 
+      - homologacao
+      - qa
   homologacao:
     container_name: homologacao
     build:
       context: .
       dockerfile: dockerfile
-    # command: npm run prod
+    working_dir: /var/www/html
     ports:
       - "1001:80"
     volumes:
       - ./HOMOLOGACAO/conf.d:/etc/nginx/conf.d
       - ./HOMOLOGACAO/php-fpm:/usr/local/etc/php-fpm.d/
-      # - ./HOMOLOGACAO/www:/var/wwww/html      
+      - ./HOMOLOGACAO/www:/var/www/html
+    networks:
+      - cleanclic
+  qa:
+    container_name: qa
+    build:
+      context: .
+      dockerfile: dockerfile
+    working_dir: /var/www/html
+    ports:
+      - "1002:80"
+    volumes:
+      - ./QA/conf.d:/etc/nginx/conf.d
+      - ./QA/php-fpm:/usr/local/etc/php-fpm.d/
+      - ./QA/www:/var/www/html
     networks:
       - cleanclic
 networks:

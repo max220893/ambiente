@@ -17,10 +17,6 @@ RUN apk add --no-cache --upgrade bash
 
 RUN rm /usr/local/etc/php-fpm.d/zz-docker.conf
 
-RUN mkdir -p /var/www/html
-RUN chown -R nginx:nginx /var/lib/nginx
-RUN chown -R nginx:nginx /var/www/html
-
 # install drivers sqlsrv
 RUN wget https://download.microsoft.com/download/e/4/e/e4e67866-dffd-428c-aac7-8d28ddafb39b/msodbcsql17_17.5.1.1-1_amd64.apk
 RUN wget https://download.microsoft.com/download/e/4/e/e4e67866-dffd-428c-aac7-8d28ddafb39b/mssql-tools_17.5.1.1-1_amd64.apk
@@ -41,12 +37,5 @@ RUN rm -rf composer-setup.php
 
 # install nodejs
 RUN apk add --update nodejs npm
-
-# laravel
-
-RUN composer create-project laravel/laravel html
-
-# RUN composer update --with-all-dependencies
-# RUN composer install
 
 CMD ["/bin/bash", "-c", "php-fpm && nginx -g 'daemon off;'"]
