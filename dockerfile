@@ -3,7 +3,7 @@ FROM php:8.0.8-fpm-alpine3.14
 USER root
 
 #ini rename
-ADD /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
 RUN apk add openrc
 
