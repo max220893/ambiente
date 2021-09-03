@@ -37,9 +37,29 @@ RUN rm mssql-tools_17.5.1.1-1_amd64.apk
 #sodium
 RUN docker-php-ext-enable sodium
 
-#gd
-RUN docker-php-ext-install gd
-RUN docker-php-ext-enable gd
+RUN apk add --no-cache php8 \
+    php8-common \
+    php8-fpm \
+    php8-pdo \
+    php8-opcache \
+    php8-zip \
+    php8-phar \
+    php8-iconv \
+    php8-cli \
+    php8-curl \
+    php8-openssl \
+    php8-mbstring \
+    php8-tokenizer \
+    php8-fileinfo \
+    php8-json \
+    php8-xml \
+    php8-xmlwriter \
+    php8-simplexml \
+    php8-dom \
+    php8-pdo_mysql \
+    php8-pdo_sqlite \
+    php8-tokenizer \
+    php8-pecl-redis
 
 
 # install composer
