@@ -5,32 +5,27 @@ USER root
 #ini rename
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
-RUN apk add --no-cache php8 \
-    php8-common \
-    php8-fpm \
-    php8-pdo \
-    php8-opcache \
-    php8-zip \
-    php8-phar \
-    php8-iconv \
-    php8-cli \
-    php8-curl \
-    php8-openssl \
-    php8-mbstring \
-    php8-tokenizer \
-    php8-fileinfo \
-    php8-json \
-    php8-xml \
-    php8-xmlwriter \
-    php8-simplexml \
-    php8-dom \
-    php8-pdo_mysql \
-    php8-pdo_sqlite \
-    php8-tokenizer \
-    php8-pecl-redis
+RUN set -e; \
+         apk add --no-cache \
+                coreutils \
+                freetype-dev \
+                libjpeg-turbo-dev \
+                libjpeg-turbo \
+                libpng-dev \
+                libzip-dev \
+                jpeg-dev \
+                icu-dev \
+                zlib-dev \
+                curl-dev \
+                imap-dev \
+                libxslt-dev libxml2-dev \
+                postgresql-dev \
+                libgcrypt-dev \
+                oniguruma-dev 
 
-RUN ln -s /usr/bin/php8 /usr/bin/php
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
+RUN docker-php-ext-configure zip
 
 RUN apk add openrc
 
