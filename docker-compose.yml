@@ -10,10 +10,6 @@ services:
       - ./PROXY/conf.d:/etc/nginx/conf.d
     networks:
       - cleanclic
-    links: 
-      - homologacao
-      - qa
-      - producao
   homologacao:
     container_name: homologacao
     image: "max220893/alpine3.13_php8.0.8-fpm_srvsql_nginx:latest"
@@ -52,7 +48,7 @@ services:
       - cleanclic
   tika:
     container_name: tika
-    image: "apache/tika:latest-full"
+    image: "apache/tika:latest"
     ports:
       - "9998:9998"
     networks:
