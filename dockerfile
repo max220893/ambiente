@@ -10,6 +10,8 @@ RUN apk add nginx && \
     mkdir -p /etc/nginx/sites-enabled /run/nginx && \
     ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
+RUN apk add --no-cache certbot-nginx
+
 # ADD ./conf.d /etc/nginx/conf.d
 # ADD ./php-fpm /usr/local/etc/php-fpm.d/
 
