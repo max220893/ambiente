@@ -1,4 +1,4 @@
-FROM php:8.0.8-fpm-alpine3.13
+FROM php:8.0.8-fpm-alpine3.14
 
 USER root
 
@@ -27,6 +27,7 @@ RUN apk add --allow-untrusted mssql-tools_17.5.1.1-1_amd64.apk
 RUN apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS unixodbc-dev
 RUN pecl install pdo_sqlsrv
 RUN docker-php-ext-enable pdo_sqlsrv
+RUN docker-php-ext-enable php-ext-sodium
 RUN apk del .phpize-deps
 RUN rm msodbcsql17_17.5.1.1-1_amd64.apk
 RUN rm mssql-tools_17.5.1.1-1_amd64.apk
